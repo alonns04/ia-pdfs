@@ -1,1 +1,3 @@
-pdfs
+/pdfs/*
+!/pdfs/
+!/pdfs/.gitignore
