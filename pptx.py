@@ -1,5 +1,20 @@
 import fitz  # PyMuPDF
 from transformers import pipeline
+import os
+import glob
+
+carpeta = r'c:\UNI\Materias\Desarrollo de SW\pptx-machine-learning\pdfs' # RUTA DE LA CARPETA CON PDFS
+
+archivos_pdf = glob.glob(os.path.join(carpeta, '*.pdf'))
+
+pdf_paths = []
+
+for archivo in archivos_pdf:
+    pdf_paths.append(archivo)
+
+
+# Ejemplo de pregunta
+question = input("Ingrese su pregunta: ")
 
 def extract_text_from_pdf(pdf_paths):
     all_text = []
@@ -20,23 +35,8 @@ def answer_question_from_pdf(pdf_texts, question):
         answers.append(result['answer'])
     return answers
 
-# Lista de rutas de archivos PDF
-pdf_paths = [
-    r'c:\UNI\Materias\Desarrollo de SW\pptx-machine-learning\pdfs\ClaseI.pdf',
-    r'c:\UNI\Materias\Desarrollo de SW\pptx-machine-learning\pdfs\ClaseII.pdf',
-    r'c:\UNI\Materias\Desarrollo de SW\pptx-machine-learning\pdfs\ClaseIII.pdf',
-    r'c:\UNI\Materias\Desarrollo de SW\pptx-machine-learning\pdfs\ClaseIV.pdf',
-    r'c:\UNI\Materias\Desarrollo de SW\pptx-machine-learning\pdfs\ClaseV.pdf',
-    r'c:\UNI\Materias\Desarrollo de SW\pptx-machine-learning\pdfs\ClaseVI.pdf',
-    r'c:\UNI\Materias\Desarrollo de SW\pptx-machine-learning\pdfs\ClaseVII.pdf',
-    r'c:\UNI\Materias\Desarrollo de SW\pptx-machine-learning\pdfs\ClaseVIII.pdf'
-]
-
 # Extraer texto de todos los archivos PDF
 all_texts = extract_text_from_pdf(pdf_paths)
-
-# Ejemplo de pregunta
-question = " debe el diseño traducirse en una forma legible para la máquina?"
 
 # Obtener respuestas para todas las PDFs
 answers = answer_question_from_pdf(all_texts, question)
